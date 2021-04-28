@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cecil2", "Cecil2\Cecil2.csproj", "{D15A75AC-85F6-4C86-B964-0FD481CCB056}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cecil2Inject", "Cecil2Inject\Cecil2Inject.csproj", "{8BFCC0FA-8708-4BD3-8BE1-7DF5AC80F6BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D15A75AC-85F6-4C86-B964-0FD481CCB056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D15A75AC-85F6-4C86-B964-0FD481CCB056}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D15A75AC-85F6-4C86-B964-0FD481CCB056}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D15A75AC-85F6-4C86-B964-0FD481CCB056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BFCC0FA-8708-4BD3-8BE1-7DF5AC80F6BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BFCC0FA-8708-4BD3-8BE1-7DF5AC80F6BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BFCC0FA-8708-4BD3-8BE1-7DF5AC80F6BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFCC0FA-8708-4BD3-8BE1-7DF5AC80F6BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D30B074C-39B5-470B-B59E-F005DD45520A}
+	EndGlobalSection
+EndGlobal
