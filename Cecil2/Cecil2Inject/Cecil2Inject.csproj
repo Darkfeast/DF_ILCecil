@@ -33,14 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DFLog">
+      <HintPath>..\DFLog\bin\Debug\DFLog.dll</HintPath>
+    </Reference>
     <Reference Include="ILRuntime.Mono.Cecil">
-      <HintPath>..\..\Cecil\3rd\ILRuntime.Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil.Mdb">
-      <HintPath>..\..\Cecil\3rd\ILRuntime.Mono.Cecil.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="ILRuntime.Mono.Cecil.Pdb">
-      <HintPath>..\..\Cecil\3rd\ILRuntime.Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>..\3rd\ILRuntime.Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="CecilInject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

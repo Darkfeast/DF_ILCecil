@@ -22,11 +22,19 @@ class Program
 {
     static void Main(string[] ar)
     {
-        string path = @"D:\Darkfeast\GitDF\DF_ILCecil\Cecil2\Cecil2\bin\Debug\Cecil2.exe";
-        string path2 = @"D:\Darkfeast\GitDF\DF_ILCecil\Cecil2\Cecil2\bin\Debug\Cecil2Modify.exe";
+        string p = Directory.GetCurrentDirectory();
+        //DFLog.Log(p);
+        p=p.Replace("Inject", "");
+        
+        string path = p+@"\Cecil2.exe";
+        string path2 =p+@"\Cecil2Modify.exe";
         if (File.Exists(path))
         {
-            Console.WriteLine("exit!!!");
+            DFLog.Log("exist!!!");
+        }
+        else
+        {
+            DFLog.Log(path);
         }
 
         //AssemblyDefinition assembly = AssemblyFactory.GetAssembly("Cecil.Program.exe");
@@ -58,7 +66,7 @@ class Program
         ILProcessor ilProcessor= sayHello.Body.GetILProcessor();
         foreach(var v in  sayHello.Body.Instructions)
         {
-            Console.WriteLine("IL " + v +"   "+v.OpCode);
+            DFLog.Log("IL " + v +"   "+v.OpCode, E_ColorType.Cyan);
         }
 
         Instruction ldstr = ilProcessor.Create(OpCodes.Ldstr, ">>Intercepting " + sayHello.Name);
@@ -67,10 +75,10 @@ class Program
 
         ilProcessor.InsertBefore(first, call);
         ilProcessor.InsertBefore(call, ldstr);
-        Console.WriteLine("-------------------");
+        DFLog.LogLine(E_ColorType.Cyan);
         foreach(var v in  sayHello.Body.Instructions)
         {
-            Console.WriteLine("IL " + v +"   "+v.OpCode);
+            DFLog.Log("IL " + v +"   "+v.OpCode, E_ColorType.DarkCyan);
         }
 
         //在SayHello方法结束位置插入一条trace语句
@@ -78,20 +86,23 @@ class Program
         //语句必须插入在OpCodes.Ret指令的前面
 
         int offset = sayHello.Body.Instructions.Count - 1;
+        DFLog.Log($"instructionsCount {offset + 1}",E_ColorType.Magenta);
         Instruction last = sayHello.Body.Instructions[offset--];
         while(last.OpCode== OpCodes.Nop|| last.OpCode==OpCodes.Ret)
         {
             last = sayHello.Body.Instructions[offset--];
         }
 
+        DFLog.Log($"last  {last}");
+
         ldstr = ilProcessor.Create(OpCodes.Ldstr, ">>Intercepted2 " + sayHello.Name);
         ilProcessor.InsertAfter(last, ldstr);
         ilProcessor.InsertAfter(ldstr, call);
 
-        Console.WriteLine("-------------------");
+        DFLog.LogLine(  E_ColorType.Yellow);
         foreach(var v in  sayHello.Body.Instructions)
         {
-            Console.WriteLine("IL " + v +"   "+v.OpCode);
+            DFLog.Log("IL " + v +"   "+v.OpCode, E_ColorType.DarkGreen);
         }
 
         //把SayHello方法改为虚方法
@@ -107,20 +118,19 @@ class Program
         //assembly.MainModule = 
 
         //sayHello.
-        Console.WriteLine("-----------------");
+        DFLog.LogLine(E_ColorType.Red);
         foreach(var v in assembly.MainModule.GetTypes())
         {
-            Console.WriteLine("name "+v.Name);
+            DFLog.Log("name "+v.Name);
         }
 
-        Console.WriteLine("-----------------");
-        Console.WriteLine(assembly.MainModule.ToString());
-        Console.WriteLine(assembly.MainModule.HasDebugHeader);
+        DFLog.LogLine();
+        DFLog.Log(assembly.MainModule.ToString());
+        DFLog.Log(assembly.MainModule.HasDebugHeader);
         //assembly.Write();
         assembly.Write(path2);
-        Console.WriteLine("Assembly modified successfully!");
+        DFLog.Log("Assembly modified successfully!");
         Console.ReadKey();
-        
     }
 }
 

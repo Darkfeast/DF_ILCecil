@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.IO;
 
 namespace Cecil2
 {
@@ -14,6 +15,11 @@ namespace Cecil2
             TestType tt = new TestType();
             tt.SayHello();
             tt.AboutMe();
+
+            string path= Directory.GetCurrentDirectory();
+            DFLog.Log(path);
+
+
             Console.ReadKey();
         }
     }
