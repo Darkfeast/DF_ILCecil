@@ -22,8 +22,8 @@ class Program
 {
     static void Main(string[] ar)
     {
-        string path = @"D:\Unity2017Datas\Cecil2\Cecil2\bin\Debug\Cecil2.exe";
-        string path2 = @"D:\Unity2017Datas\Cecil2\Cecil2\bin\Debug\Cecil2Modify.exe";
+        string path = @"D:\Darkfeast\GitDF\DF_ILCecil\Cecil2\Cecil2\bin\Debug\Cecil2.exe";
+        string path2 = @"D:\Darkfeast\GitDF\DF_ILCecil\Cecil2\Cecil2\bin\Debug\Cecil2Modify.exe";
         if (File.Exists(path))
         {
             Console.WriteLine("exit!!!");
@@ -56,7 +56,6 @@ class Program
 
         //CilWorker worker = sayHello.Body.CilWorker;
         ILProcessor ilProcessor= sayHello.Body.GetILProcessor();
-
         foreach(var v in  sayHello.Body.Instructions)
         {
             Console.WriteLine("IL " + v +"   "+v.OpCode);
@@ -68,6 +67,11 @@ class Program
 
         ilProcessor.InsertBefore(first, call);
         ilProcessor.InsertBefore(call, ldstr);
+        Console.WriteLine("-------------------");
+        foreach(var v in  sayHello.Body.Instructions)
+        {
+            Console.WriteLine("IL " + v +"   "+v.OpCode);
+        }
 
         //在SayHello方法结束位置插入一条trace语句
         //  Console.WriteLine(">>Intercepted ");
@@ -83,6 +87,12 @@ class Program
         ldstr = ilProcessor.Create(OpCodes.Ldstr, ">>Intercepted2 " + sayHello.Name);
         ilProcessor.InsertAfter(last, ldstr);
         ilProcessor.InsertAfter(ldstr, call);
+
+        Console.WriteLine("-------------------");
+        foreach(var v in  sayHello.Body.Instructions)
+        {
+            Console.WriteLine("IL " + v +"   "+v.OpCode);
+        }
 
         //把SayHello方法改为虚方法
         sayHello.IsVirtual = true;
