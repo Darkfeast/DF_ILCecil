@@ -121,7 +121,7 @@ class Program
         DFLog.LogLine(E_ColorType.Red);
         foreach(var v in assembly.MainModule.GetTypes())
         {
-            DFLog.Log("name "+v.Name);
+            DFLog.Log($"name  {v.Name}   fm  {v.FullName}");
         }
 
         DFLog.LogLine();
