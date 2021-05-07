@@ -15,4 +15,14 @@ namespace Cecil2
     {
 
     }
+
+    class TestClassSub:TestClass
+    {
+
+    }
+
+    class TestClassSub2:TestClassSub
+    {
+
+    }
 }

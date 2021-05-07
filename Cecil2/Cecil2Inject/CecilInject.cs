@@ -119,9 +119,22 @@ class Program
 
         //sayHello.
         DFLog.LogLine(E_ColorType.Red);
+        TypeDefinition ss;
+        TypeSpecification ss2;
         foreach(var v in assembly.MainModule.GetTypes())
         {
-            DFLog.Log($"name  {v.Name}   fm  {v.FullName}");
+            DFLog.Log($"name  {v.Name}   fm  {v.FullName}   ref {v.GetElementType()}   ");
+            TypeReference vv = v;
+            if(vv is TypeSpecification)
+            {
+                DFLog.Log($"spe  {((TypeSpecification)vv).ElementType}    ",E_ColorType.Cyan);
+                DFLog.Log($"spe2  {((TypeSpecification)vv).GetElementType()}",E_ColorType.Green);
+            }
+            else
+            {
+                DFLog.Log("################");
+            }
+         
         }
 
         DFLog.LogLine();
@@ -130,6 +143,10 @@ class Program
         //assembly.Write();
         assembly.Write(path2);
         DFLog.Log("Assembly modified successfully!");
+
+        DFLog.LogLine();
+
+
         Console.ReadKey();
     }
 }
