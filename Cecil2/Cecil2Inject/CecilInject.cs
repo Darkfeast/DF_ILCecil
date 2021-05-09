@@ -119,8 +119,7 @@ class Program
 
         //sayHello.
         DFLog.LogLine(E_ColorType.Red);
-        TypeDefinition ss;
-        TypeSpecification ss2;
+        DFLog.Log("判断类型是不是 TypeSpecification");
         foreach(var v in assembly.MainModule.GetTypes())
         {
             DFLog.Log($"name  {v.Name}   fm  {v.FullName}   ref {v.GetElementType()}   ");
@@ -136,6 +135,21 @@ class Program
             }
          
         }
+
+
+        DFLog.Log("判断方法是否为实例方法");
+        foreach (var v in type.Methods)
+        {
+            if (v.HasThis)
+            {
+                DFLog.Log($"instance Method   {v.FullName}",E_ColorType.Green);
+            }
+            else
+            { 
+                DFLog.Log($"static  Method   {v.FullName}",E_ColorType.Cyan);
+            }
+        }
+
 
         DFLog.LogLine();
         DFLog.Log(assembly.MainModule.ToString());
