@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DFLog">
-      <HintPath>..\DFLog\bin\Debug\DFLog.dll</HintPath>
-    </Reference>
     <Reference Include="ILRuntime.Mono.Cecil">
       <HintPath>..\3rd\ILRuntime.Mono.Cecil.dll</HintPath>
     </Reference>

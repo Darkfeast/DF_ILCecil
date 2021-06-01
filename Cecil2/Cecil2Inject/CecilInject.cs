@@ -16,16 +16,16 @@ class Program
         string path2 =p+@"\Cecil2Modify.exe";
         if (File.Exists(path))
         {
-            DFLog.Log("exist!!!");
+            DF.Log("exist!!!");
         }
         else
         {
-            DFLog.Log(path);
+            DF.Log(path);
         }
 
         //AssemblyDefinition assembly = AssemblyFactory.GetAssembly("Cecil.Program.exe");
         AssemblyDefinition assembly = AssemblyDefinition.ReadAssembly(path);
-        DFLog.Log($"entryPoint  {assembly.EntryPoint.Name}");
+        DF.Log($"entryPoint  {assembly.EntryPoint.Name}");
 
         //TypeDefinition type = assembly.MainModule.Types["Cecil.TestType"];
         TypeDefinition type = assembly.MainModule.GetType("Cecil2.TestType");
@@ -53,7 +53,7 @@ class Program
         ILProcessor ilProcessor= sayHello.Body.GetILProcessor();
         foreach(var v in  sayHello.Body.Instructions)
         {
-            DFLog.Log("IL " + v +"   "+v.OpCode, E_ColorType.Cyan);
+            DF.Log("IL " + v +"   "+v.OpCode, E_ColorType.Cyan);
         }
 
         Instruction ldstr = ilProcessor.Create(OpCodes.Ldstr, ">>Intercepting " + sayHello.Name);
@@ -62,10 +62,10 @@ class Program
 
         ilProcessor.InsertBefore(first, call);
         ilProcessor.InsertBefore(call, ldstr);
-        DFLog.LogLine(E_ColorType.Cyan);
+        DF.LogLine(E_ColorType.Cyan);
         foreach(var v in  sayHello.Body.Instructions)
         {
-            DFLog.Log("IL " + v +"   "+v.OpCode, E_ColorType.DarkCyan);
+            DF.Log("IL " + v +"   "+v.OpCode, E_ColorType.DarkCyan);
         }
 
         //在SayHello方法结束位置插入一条trace语句
@@ -73,23 +73,23 @@ class Program
         //语句必须插入在OpCodes.Ret指令的前面
 
         int offset = sayHello.Body.Instructions.Count - 1;
-        DFLog.Log($"instructionsCount {offset + 1}",E_ColorType.Magenta);
+        DF.Log($"instructionsCount {offset + 1}",E_ColorType.Magenta);
         Instruction last = sayHello.Body.Instructions[offset--];
         while(last.OpCode== OpCodes.Nop|| last.OpCode==OpCodes.Ret)
         {
             last = sayHello.Body.Instructions[offset--];
         }
 
-        DFLog.Log($"last  {last}");
+        DF.Log($"last  {last}");
 
         ldstr = ilProcessor.Create(OpCodes.Ldstr, ">>Intercepted2 " + sayHello.Name);
         ilProcessor.InsertAfter(last, ldstr);
         ilProcessor.InsertAfter(ldstr, call);
 
-        DFLog.LogLine(  E_ColorType.Yellow);
+        DF.LogLine(  E_ColorType.Yellow);
         foreach(var v in  sayHello.Body.Instructions)
         {
-            DFLog.Log("IL " + v +"   "+v.OpCode, E_ColorType.DarkGreen);
+            DF.Log("IL " + v +"   "+v.OpCode, E_ColorType.DarkGreen);
         }
 
         //把SayHello方法改为虚方法
@@ -105,47 +105,47 @@ class Program
         //assembly.MainModule = 
 
         //sayHello.
-        DFLog.LogLine(E_ColorType.Red);
-        DFLog.Log("判断类型是不是 TypeSpecification");
+        DF.LogLine(E_ColorType.Red);
+        DF.Log("判断类型是不是 TypeSpecification");
         foreach(var v in assembly.MainModule.GetTypes())
         {
-            DFLog.Log($"name  {v.Name}   fm  {v.FullName}   ref {v.GetElementType()}   ");
+            DF.Log($"name  {v.Name}   fm  {v.FullName}   ref {v.GetElementType()}   ");
             TypeReference vv = v;
             if(vv is TypeSpecification)
             {
-                DFLog.Log($"spe  {((TypeSpecification)vv).ElementType}    ",E_ColorType.Cyan);
-                DFLog.Log($"spe2  {((TypeSpecification)vv).GetElementType()}",E_ColorType.Green);
+                DF.Log($"spe  {((TypeSpecification)vv).ElementType}    ",E_ColorType.Cyan);
+                DF.Log($"spe2  {((TypeSpecification)vv).GetElementType()}",E_ColorType.Green);
             }
             else
             {
-                DFLog.Log("################");
+                DF.Log("################");
             }
          
         }
 
 
-        DFLog.Log("判断方法是否为实例方法");
+        DF.Log("判断方法是否为实例方法");
         foreach (var v in type.Methods)
         {
             if (v.HasThis)
             {
-                DFLog.Log($"instance Method   {v.FullName}",E_ColorType.Green);
+                DF.Log($"instance Method   {v.FullName}",E_ColorType.Green);
             }
             else
             { 
-                DFLog.Log($"static  Method   {v.FullName}",E_ColorType.Cyan);
+                DF.Log($"static  Method   {v.FullName}",E_ColorType.Cyan);
             }
         }
 
 
-        DFLog.LogLine();
-        DFLog.Log(assembly.MainModule.ToString());
-        DFLog.Log(assembly.MainModule.HasDebugHeader);
+        DF.LogLine();
+        DF.Log(assembly.MainModule.ToString());
+        DF.Log(assembly.MainModule.HasDebugHeader);
         //assembly.Write();
         assembly.Write(path2);
-        DFLog.Log("Assembly modified successfully!");
+        DF.Log("Assembly modified successfully!");
 
-        DFLog.LogLine();
+        DF.LogLine();
 
 
         Console.ReadKey();
