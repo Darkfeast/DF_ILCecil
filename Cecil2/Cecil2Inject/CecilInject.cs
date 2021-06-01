@@ -5,25 +5,11 @@ using System.Reflection;
 using System.IO;
 //using Mono.Cecil;
 //using Mono.Cecil.Cil;
-
-//namespace CecilInject
-//{
-//    class Program
-//    {
-//        static void Main(string[] args)
-//        {
-//            Console.WriteLine("Hello World!");
-//        }
-//    }
-//}
-
-
 class Program
 {
     static void Main(string[] ar)
     {
         string p = Directory.GetCurrentDirectory();
-        //DFLog.Log(p);
         p=p.Replace("Inject", "");
         
         string path = p+@"\Cecil2.exe";
@@ -39,6 +25,8 @@ class Program
 
         //AssemblyDefinition assembly = AssemblyFactory.GetAssembly("Cecil.Program.exe");
         AssemblyDefinition assembly = AssemblyDefinition.ReadAssembly(path);
+        DFLog.Log($"entryPoint  {assembly.EntryPoint.Name}");
+
         //TypeDefinition type = assembly.MainModule.Types["Cecil.TestType"];
         TypeDefinition type = assembly.MainModule.GetType("Cecil2.TestType");
         MethodDefinition sayHello = null;
@@ -49,8 +37,7 @@ class Program
                 sayHello = md;
             }
         }
-        //Type ttt = typeof(Console);
-        //ttt = new Program().GetType();
+ 
 
         //Console.WriteLine(string value)方法
         MethodInfo writeLine = typeof(Console).GetMethod("WriteLine", new Type[] { typeof(string)});

@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F10E3C94-BA60-4E49-AEF3-7E52757B7096}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>DFLog</RootNamespace>
-    <AssemblyName>DFLog</AssemblyName>
+    <RootNamespace>DF</RootNamespace>
+    <AssemblyName>DF</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DFLog.cs" />
+    <Compile Include="DF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

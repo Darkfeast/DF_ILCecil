@@ -19,7 +19,6 @@ namespace Cecil2
             string path= Directory.GetCurrentDirectory();
             DFLog.Log(path);
 
-
             Console.ReadKey();
         }
     }

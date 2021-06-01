@@ -23,7 +23,7 @@ public enum E_ColorType
     DarkYellow,
 }
 
-public class DFLog
+public class DF
 {
 
     public static void Log(object obj , E_ColorType col= E_ColorType.Gray)
