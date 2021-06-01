@@ -31,6 +31,11 @@ namespace Cecil2
             Console.WriteLine("Hello Cecil");
         }
 
+        public static void StaticSayHello()
+        {
+
+        }
+
         public void AboutMe()
         {
             Type type = typeof(TestType);
